@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "../../.eslintrc.json",
+    "next/core-web-vitals"
+  ],
+	"plugins": ["10x"],
+  "rules": {
+    "10x/auto-import": [
+			"error",
+			{
+				"imports": {
+					"useRef": "import { useRef } from 'react'",
+					"useEffect": "import { useEffect } from 'react'",
+					"useState": "import { useState } from 'react'",
+					"useCallback": "import { useCallback } from 'react'",
+
+					"useCurrent": "import { useCurrent } from '@hooks'",
+					"useUser": "import { useUser } from '@hooks'",
+					"useProjects": "import { useProjects } from '@hooks'",
+					
+					"Button": "import { Button } from '@kiqr/cloud-ui'",
+					
+					"Head": "import Head from 'next/head'",
+					"useRouter": "import { useRouter } from 'next/router'"
+				}
+			}
+		]
+  }
+}
