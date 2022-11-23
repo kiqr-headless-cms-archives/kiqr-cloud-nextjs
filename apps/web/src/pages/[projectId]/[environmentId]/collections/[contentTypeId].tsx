@@ -13,9 +13,10 @@ import {
 
 import { CreateYourFirstAnnouncement } from '@components'
 import { useCurrent, useResources } from '@hooks'
-import inflection from 'inflection'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
+import * as inflection from 'inflection'
 
 const ContentTypePage: NextPage = () => {
   const [page, setPage] = useState(1)
@@ -94,7 +95,7 @@ const ContentTypePage: NextPage = () => {
 
       {currentContentType && emptyResults ? (
         <CreateYourFirstAnnouncement
-          href="#"
+          href={`/${currentProject?.slug}/${currentEnvironment?.slug}/collections/${currentContentType?.id}/new`}
           contentTypeName={currentContentType?.name}
         />
       ) : null}

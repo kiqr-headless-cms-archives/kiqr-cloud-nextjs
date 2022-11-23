@@ -5,6 +5,7 @@ import { Sidebar } from 'components/templates/Sidebar'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { Toaster } from 'react-hot-toast'
 
 import '../styles/globals.css'
 
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Login — KIQR</title>
       </Head>
       <KiqrProvider>
+        <Toaster />
         <AppShell
           logo={<LinkedLogo />}
           toolbar={<Toolbar />}

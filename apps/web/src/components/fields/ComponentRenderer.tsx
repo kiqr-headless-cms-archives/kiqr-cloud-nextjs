@@ -8,7 +8,7 @@ import {
   Row,
   Table,
 } from '@kiqr/cloud-ui'
-import inflection from 'inflection'
+
 import { useState } from 'react'
 import { useFieldArray, useWatch } from 'react-hook-form'
 import {
@@ -29,6 +29,9 @@ import type {
   UseFormRegister,
   UseFormWatch,
 } from 'react-hook-form'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+import * as inflection from 'inflection'
 
 interface ComponentRendererProps {
   rootFieldName: string

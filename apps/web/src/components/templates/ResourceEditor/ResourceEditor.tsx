@@ -4,9 +4,11 @@ import { FaWrench } from 'react-icons/fa'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import { useCurrent } from '../../../hooks'
 
-import inflection from 'inflection'
 import { useState } from 'react'
 import { ComponentRenderer, FieldRenderer, FormError } from '../../fields'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+import * as inflection from 'inflection'
 
 export interface ResourceEditorProps {
   register: any
@@ -25,13 +27,6 @@ export const ResourceEditor = ({
   const [currentTabIndex, setTabIndex] = useState(0)
 
   if (!currentContentType) return null
-
-  const singularizedContentTypeName = currentContentType
-    ? inflection
-        .transform(currentContentType.name, ['singularize'])
-        ?.toLowerCase()
-    : null
-
   const tabNames = [{ title: 'General', subtitle: 'General settings' }]
 
   return (
@@ -71,7 +66,10 @@ export const ResourceEditor = ({
                   type="text"
                   {...register('name', { required: true })}
                   className="border-neutral-200 outline-none focus:ring-0 text-sm bg-neutral-50 p-3 rounded"
-                  placeholder={`Give your ${singularizedContentTypeName} a name`}
+                  placeholder={`Give your ${inflection.transform(
+                    currentContentType.name,
+                    ['singularize']
+                  )} a name`}
                 />
                 {errors?.name && <FormError message="This field is required" />}
               </div>
@@ -89,7 +87,10 @@ export const ResourceEditor = ({
                     pattern: /^[A-Za-z0-9\-_]+$/i,
                   })}
                   className="border-neutral-200 outline-none focus:ring-0 text-sm bg-neutral-50 p-3 rounded"
-                  placeholder={`Give your ${singularizedContentTypeName} a url friendly slug`}
+                  placeholder={`Give your ${inflection.transform(
+                    currentContentType.name,
+                    ['singularize']
+                  )} a url friendly slug`}
                 />
                 {errors?.slug && <FormError message="This field is required" />}
               </div>

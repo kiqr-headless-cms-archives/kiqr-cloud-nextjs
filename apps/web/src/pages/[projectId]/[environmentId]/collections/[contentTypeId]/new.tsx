@@ -1,34 +1,25 @@
 import type { NextPage } from 'next'
 
 import { ResourceEditor } from '@components'
-import { useCurrent, useResource } from '@hooks'
-import {
-  Button,
-  Card,
-  Column,
-  Group,
-  Heading,
-  LocalTime,
-  Row,
-  Table,
-} from '@kiqr/cloud-ui'
+import { useCurrent } from '@hooks'
+import { Button, Card, Group, Heading } from '@kiqr/cloud-ui'
 
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { FaGlobe, FaSave, FaUndo } from 'react-icons/fa'
+import { FaGlobe, FaSave } from 'react-icons/fa'
 
 import { useAuth0 } from '@auth0/auth0-react'
 import {
   Configuration,
+  CreateResourceRequest,
   ResourcesApi,
-  UpdateResourceRequest,
 } from '@kiqr/management-api-sdk'
 
-const EditResourcePage: NextPage = () => {
-  const query = useRouter().query
-  const { getAccessTokenSilently } = useAuth0()
+const NewResourcePage: NextPage = () => {
+  const { push } = useRouter()
+  const [isLoading, setIsLoading] = useState(true)
 
   const {
     currentContentType,
@@ -36,10 +27,8 @@ const EditResourcePage: NextPage = () => {
     currentSchema,
     currentEnvironment,
   } = useCurrent()
-  const { resource, mutate, versions, versionsMutate } = useResource(
-    query?.resourceId as string
-  )
-  const [isLoading, setIsLoading] = useState(true)
+
+  const { getAccessTokenSilently } = useAuth0()
 
   const {
     control,
@@ -48,31 +37,27 @@ const EditResourcePage: NextPage = () => {
     formState: { errors },
     setValue,
     watch,
-  } = useForm<UpdateResourceRequest>()
+  } = useForm<CreateResourceRequest>()
 
   useEffect(() => {
-    if (!currentContentType || !currentSchema || !resource || !isLoading) return
+    if (!currentContentType || !currentSchema || !isLoading) return
 
-    setValue('name', resource.name)
-    setValue('slug', resource.slug)
+    setValue('name', '')
+    setValue('slug', '')
 
     currentContentType.fields.map((field) => {
       // @ts-expect-error content has any type
-      const value = resource.content[field.id] || null
-
-      // @ts-expect-error content has any type
-      setValue(`content[${field.id}]`, value)
+      setValue(`content[${field.id}]`, '')
     })
 
     setIsLoading(false)
-  }, [currentContentType, currentSchema, resource, isLoading, setValue])
+  }, [currentContentType, currentSchema, isLoading, setValue])
 
   // Handle submission of form.
-  const onSubmit = async (data: UpdateResourceRequest): Promise<void> => {
+  const onSubmit = async (data: CreateResourceRequest): Promise<void> => {
     if (!currentContentType) return console.error('Missing content type')
     if (!currentProject) return console.error('Missing project_id')
     if (!currentEnvironment) return console.error('Missing environment_id')
-    if (!resource) return console.error('Missing resource id')
 
     const token = await getAccessTokenSilently()
 
@@ -81,18 +66,19 @@ const EditResourcePage: NextPage = () => {
     })
 
     const api = new ResourcesApi(configuration)
-    const payload: UpdateResourceRequest = {
+    const payload: CreateResourceRequest = {
       ...data,
+      content_type: currentContentType.id,
     }
 
     toast.promise(
-      api
-        .updateResource(resource.id, currentEnvironment.id, payload)
-        .then((response) => {
-          mutate(response.data)
-          console.log('response:', response.data)
-          versionsMutate()
-        }),
+      api.createResource(currentEnvironment.id, payload).then((response) => {
+        if (response?.data?.slug) {
+          push(
+            `/${currentProject?.slug}/${currentEnvironment?.slug}/collections/${currentContentType?.id}/resources/${response.data.slug}`
+          )
+        }
+      }),
       {
         loading: 'Saving...',
         success: 'Changes saved!',
@@ -136,34 +122,6 @@ const EditResourcePage: NextPage = () => {
             </Group>
           </Card>
 
-          <Table
-            title="Versions"
-            subtitle="Undo changes / revert to an earlier version"
-          >
-            <thead>
-              <Row>
-                <Column variant="th" className="w-0 text-center">
-                  Version
-                </Column>
-                <Column variant="th">Timestamp</Column>
-              </Row>
-            </thead>
-            <tbody>
-              {versions &&
-                versions.map((version) => (
-                  <Row key={version.version}>
-                    <Column className="text-center">{version.version}</Column>
-                    <Column>
-                      <Group className="justify-between">
-                        <LocalTime epochTime={version.updated_at} />
-                        <Button size="xs" icon={<FaUndo />} />
-                      </Group>
-                    </Column>
-                  </Row>
-                ))}
-            </tbody>
-          </Table>
-
           <Card
             title="Delete resource"
             subtitle="Unpublish and archive resource"
@@ -183,4 +141,4 @@ const EditResourcePage: NextPage = () => {
   )
 }
 
-export default EditResourcePage
+export default NewResourcePage
