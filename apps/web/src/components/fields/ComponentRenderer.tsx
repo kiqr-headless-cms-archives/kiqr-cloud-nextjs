@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   Box,
   Button,
@@ -22,7 +24,7 @@ import {
 import { useCurrent } from '../../hooks'
 import { FieldRenderer } from './FieldRenderer'
 
-import type { Component, UpdateResourceRequest } from '@kiqr/management-api-sdk'
+import type { Component } from '@kiqr/management-api-sdk'
 import type {
   Control,
   FieldErrorsImpl,
@@ -36,16 +38,10 @@ import * as inflection from 'inflection'
 interface ComponentRendererProps {
   rootFieldName: string
   componentId: string
-  control: Control<UpdateResourceRequest, any>
-  register: UseFormRegister<UpdateResourceRequest>
-  errors: Partial<
-    FieldErrorsImpl<{
-      name: string
-      slug: string
-      content: object
-    }>
-  >
-  watch: UseFormWatch<UpdateResourceRequest>
+  control: Control<Record<string, any>, any>
+  register: UseFormRegister<Record<string, any>>
+  errors: Partial<FieldErrorsImpl<Record<string, any>>>
+  watch: UseFormWatch<Record<string, any>>
   repeatable: boolean
 }
 

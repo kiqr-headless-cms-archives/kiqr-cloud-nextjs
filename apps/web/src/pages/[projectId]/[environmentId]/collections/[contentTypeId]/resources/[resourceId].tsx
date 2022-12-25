@@ -90,7 +90,6 @@ const EditResourcePage: NextPage = () => {
         .updateResource(resource.id, currentEnvironment.id, payload)
         .then((response) => {
           mutate(response.data)
-          console.log('response:', response.data)
           versionsMutate()
         }),
       {
@@ -104,7 +103,7 @@ const EditResourcePage: NextPage = () => {
   return (
     <>
       <Heading
-        title={currentContentType ? currentContentType.name : ''}
+        title={resource ? resource.name : ''}
         subtitle={`Listing all resources in collection ${
           currentContentType
             ? currentContentType.name.toLocaleLowerCase()

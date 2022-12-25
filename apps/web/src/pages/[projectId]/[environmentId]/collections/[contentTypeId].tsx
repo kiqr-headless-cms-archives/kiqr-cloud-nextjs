@@ -43,7 +43,21 @@ const ContentTypePage: NextPage = () => {
             ? currentContentType.name.toLocaleLowerCase()
             : null
         }`}
-      />
+        variant="page"
+      >
+        <Link
+          href={`/${currentProject?.slug}/${currentEnvironment?.slug}/collections/${currentContentType?.id}/new`}
+        >
+          <Button>
+            Create a new{' '}
+            {currentContentType
+              ? inflection
+                  .singularize(currentContentType.name)
+                  .toLocaleLowerCase()
+              : 'resource'}
+          </Button>
+        </Link>
+      </Heading>
 
       {resources && resources.length > 0 ? (
         <Table>
