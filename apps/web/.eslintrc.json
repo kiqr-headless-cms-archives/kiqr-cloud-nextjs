@@ -26,8 +26,10 @@
 
 					"ProjectCard": "import { ProjectCard } from '@components/organisms'",
 
+					"ContentType": "import type { ContentType } from '@types'",
 					"Project": "import type { Project } from '@types'",
-					"Environment": "import type { Environment } from '@types'"
+					"Environment": "import type { Environment } from '@types'",
+					"Schema": "import type { Schema } from '@types'"
 				}
 			}
 		]

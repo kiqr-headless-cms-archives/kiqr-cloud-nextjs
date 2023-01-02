@@ -1,7 +1,6 @@
+import type { Schema } from '@types'
 import useSWR from 'swr'
 import { useFetcher } from '.'
-
-import type { SchemaExtended } from '@kiqr/management-api-sdk'
 
 export const useProjectSchema = (projectId?: string, id?: string) => {
   const { fetcher } = useFetcher()
@@ -11,7 +10,7 @@ export const useProjectSchema = (projectId?: string, id?: string) => {
     data: schema,
     error,
     mutate,
-  } = useSWR<SchemaExtended>(
+  } = useSWR<Schema>(
     isReady ? `v1/projects/${projectId}/schemas/${id}` : null,
     fetcher
   )

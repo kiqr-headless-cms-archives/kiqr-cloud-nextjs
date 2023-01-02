@@ -1,9 +1,8 @@
+import { ContentType } from '@types'
 import { useRouter } from 'next/router'
 import { FaFire, FaFolder, FaPhotoVideo, FaRegClock } from 'react-icons/fa'
 import { SidebarLink } from '.'
 import { useContentTypes, useCurrent } from '../../../hooks'
-
-import type { ContentType } from '@kiqr/management-api-sdk'
 
 export const Sidebar = () => {
   const router = useRouter()
@@ -11,7 +10,7 @@ export const Sidebar = () => {
   const { contentTypes } = useContentTypes()
 
   const collectionHref = (contentType: ContentType) => {
-    return `/${currentProject?.slug}/${currentEnvironment?.slug}/collections/${contentType.id}`
+    return `/${currentProject?.id}/${currentEnvironment?.id}/collections/${contentType.id}`
   }
 
   const collectionActive = (contentType: ContentType) => {
@@ -27,25 +26,27 @@ export const Sidebar = () => {
     : []
 
   const singles = Array.isArray(contentTypes)
-    ? contentTypes?.filter((ct) => ct.kind === 'single')
+    ? contentTypes.filter((ct) => ct.kind === 'single')
     : []
+
+  console.log('content types', contentTypes)
 
   return (
     <nav className="flex flex-col">
       <SidebarLink
-        href={`/${currentProject?.slug}/${currentEnvironment?.slug}`}
+        href={`/${currentProject?.id}/${currentEnvironment?.id}`}
         title="Dashboard"
         icon={<FaFire />}
         active={router.pathname === '/[projectId]/[environmentId]'}
       />
       <SidebarLink
-        href={`/${currentProject?.slug}/${currentEnvironment?.slug}/media`}
+        href={`/${currentProject?.id}/${currentEnvironment?.id}/media`}
         title="Media library"
         icon={<FaPhotoVideo />}
         active={router.pathname === '/[projectId]/[environmentId]/media'}
       />
       <SidebarLink
-        href={`/${currentProject?.slug}/${currentEnvironment?.slug}/log`}
+        href={`/${currentProject?.id}/${currentEnvironment?.id}/log`}
         title="Activity log"
         icon={<FaRegClock />}
         active={router.pathname === '/[projectId]/[environmentId]/log'}

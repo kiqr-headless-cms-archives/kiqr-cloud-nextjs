@@ -1,13 +1,14 @@
+import type { ContentType, Schema } from '@types'
 import { useEffect, useState } from 'react'
 
-import type { ContentType, SchemaExtended } from '@kiqr/management-api-sdk'
-
-export const useContentType = (schema?: SchemaExtended, id?: string) => {
+export const useContentType = (schema?: Schema, id?: string) => {
   const [contentType, setContentType] = useState<ContentType>()
 
   useEffect(() => {
     if (schema?.data?.content_types && id) {
-      const contentType = schema.data.content_types.find((ct) => ct.id === id)
+      const contentType = schema.data.content_types.find(
+        (ct: ContentType) => ct.id === id
+      )
       setContentType(contentType)
     } else {
       setContentType(undefined)

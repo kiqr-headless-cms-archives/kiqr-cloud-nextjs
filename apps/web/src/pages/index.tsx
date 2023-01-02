@@ -4,7 +4,7 @@ import { Heading } from '@kiqr/cloud-ui'
 import Head from 'next/head'
 
 export default function HomePage() {
-  const { currentUser } = useCurrent()
+  const { currentUser, currentProject } = useCurrent()
   const { projects } = useProjects()
 
   return (
@@ -24,6 +24,8 @@ export default function HomePage() {
       {projects && projects.length > 0 ? (
         <ProjectStack projects={projects} isLoading={!projects} />
       ) : null}
+
+      {JSON.stringify(currentProject, null, 2)}
     </>
   )
 }
