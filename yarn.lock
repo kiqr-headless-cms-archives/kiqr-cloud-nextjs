@@ -1401,6 +1401,14 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@kiqr/management-api-sdk@*":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@kiqr/management-api-sdk/-/management-api-sdk-0.2.0.tgz#5a8a3ed07a2b00b544e458afb82597c6139e83d2"
+  integrity sha512-1e1FWbtncTz6wTONgjQc8RrTrACPuchb7nVC4S/R9WQDRrg7G5Rx+26m0ddbSysgaDlUCnUEx8EQdK+vSX+y1g==
+  dependencies:
+    axios "^0.27.2"
+    ts-node "^10.9.1"
+
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.6.22.tgz#8a723157bf90e78f17dc0f27995398e6c731f1ba"
@@ -2976,7 +2984,7 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@18.11.9", "@types/node@^18.7.18":
+"@types/node@*", "@types/node@18.11.9":
   version "18.11.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
   integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==

@@ -9,11 +9,11 @@ import { Toaster } from 'react-hot-toast'
 
 import '../styles/globals.css'
 
-const AUTH0_DOMAIN = process.env.NEXT_PUBLIC_AUTH0_DOMAIN || 'auth.kiqr.cloud'
+const AUTH0_DOMAIN = process.env.NEXT_PUBLIC_AUTH0_DOMAIN || 'kiqr.eu.auth0.com'
 const AUTH0_CLIENT_ID =
   process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID || 'K5h6zxThq1Nmhw7pzh9wwE4UMqo8I6Fb'
 const AUTH0_REDIRECT_URI =
-  process.env.NEXT_PUBLIC_AUTH0_REDIRECT_URI || 'https://kiqr.cloud'
+  process.env.NEXT_PUBLIC_AUTH0_REDIRECT_URI || 'http://localhost:3000'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { query } = useRouter()
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       issuer={AUTH0_DOMAIN}
       clientId={AUTH0_CLIENT_ID}
       redirectUri={AUTH0_REDIRECT_URI}
-      audience="https://management-api.kiqr.cloud/"
+      audience="https://api.kiqr.cloud/"
     >
       <Head>
         <title>Login — KIQR</title>
