@@ -14,7 +14,9 @@ export default function HomePage() {
       </Head>
       <Heading
         title={
-          currentUser?.name ? `Welcome back, ${currentUser?.name}!` : undefined
+          currentUser?.email
+            ? `Welcome back, ${currentUser?.email}!`
+            : undefined
         }
         subtitle="Select one of your projects below to continue:"
       />

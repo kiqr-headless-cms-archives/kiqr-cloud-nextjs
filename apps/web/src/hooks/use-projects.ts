@@ -1,7 +1,6 @@
+import type { Project } from '@types'
 import useSWR from 'swr'
 import { useFetcher } from '.'
-
-import type { Project } from '@kiqr/management-api-sdk'
 
 export const useProjects = () => {
   const { fetcher } = useFetcher()

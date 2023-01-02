@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 
 const API_BASE_URL =
-  process.env.NODE_PUBLIC_API_BASE || 'https://management-api.kiqr.cloud'
+  process.env.NEXT_PUBLIC_API_BASE || 'https://api.kiqr.cloud'
 
 export const useFetcher = () => {
   const { getAccessTokenSilently } = useAuth0()

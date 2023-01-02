@@ -18,6 +18,7 @@
     "paths": {
       "@components": ["components"],
       "@hooks": ["hooks"],
+      "@types": ["types"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

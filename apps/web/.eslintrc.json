@@ -21,7 +21,13 @@
 					"Button": "import { Button } from '@kiqr/cloud-ui'",
 					
 					"Head": "import Head from 'next/head'",
-					"useRouter": "import { useRouter } from 'next/router'"
+					"useRouter": "import { useRouter } from 'next/router'",
+
+
+					"ProjectCard": "import { ProjectCard } from '@components/organisms'",
+
+					"Project": "import type { Project } from '@types'",
+					"Environment": "import type { Environment } from '@types'"
 				}
 			}
 		]

@@ -1,7 +1,6 @@
-import { ProjectCard } from '@kiqr/cloud-ui'
+import { ProjectCard } from '@components'
+import type { Project } from '@types'
 import Link from 'next/link'
-
-import type { Project } from '@kiqr/management-api-sdk'
 
 interface ProjectStackProps {
   projects: Project[]
@@ -14,7 +13,7 @@ export const ProjectStack = ({ projects, isLoading }: ProjectStackProps) => {
   return (
     <div className={'grid grid-cols-4 gap-5'}>
       {projects.map((project) => (
-        <Link key={project.id} href={`/${project.slug}/development`}>
+        <Link key={project.id} href={`/${project.id}/development`}>
           <ProjectCard project={project} />
         </Link>
       ))}
