@@ -10,7 +10,7 @@ export const Sidebar = () => {
   const { contentTypes } = useContentTypes()
 
   const collectionHref = (contentType: ContentType) => {
-    return `/${currentProject?.id}/${currentEnvironment?.id}/collections/${contentType.id}`
+    return `/${currentProject?.id}/${currentEnvironment?.slug}/collections/${contentType.id}`
   }
 
   const collectionActive = (contentType: ContentType) => {
@@ -29,24 +29,22 @@ export const Sidebar = () => {
     ? contentTypes.filter((ct) => ct.kind === 'single')
     : []
 
-  console.log('content types', contentTypes)
-
   return (
     <nav className="flex flex-col">
       <SidebarLink
-        href={`/${currentProject?.id}/${currentEnvironment?.id}`}
+        href={`/${currentProject?.id}/${currentEnvironment?.slug}`}
         title="Dashboard"
         icon={<FaFire />}
         active={router.pathname === '/[projectId]/[environmentId]'}
       />
       <SidebarLink
-        href={`/${currentProject?.id}/${currentEnvironment?.id}/media`}
+        href={`/${currentProject?.id}/${currentEnvironment?.slug}/media`}
         title="Media library"
         icon={<FaPhotoVideo />}
         active={router.pathname === '/[projectId]/[environmentId]/media'}
       />
       <SidebarLink
-        href={`/${currentProject?.id}/${currentEnvironment?.id}/log`}
+        href={`/${currentProject?.id}/${currentEnvironment?.slug}/log`}
         title="Activity log"
         icon={<FaRegClock />}
         active={router.pathname === '/[projectId]/[environmentId]/log'}

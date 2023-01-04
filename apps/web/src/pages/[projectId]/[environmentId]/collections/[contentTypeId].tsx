@@ -5,7 +5,6 @@ import {
   Column,
   Group,
   Heading,
-  LocalTime,
   Pagination,
   Row,
   Table,
@@ -82,16 +81,18 @@ const ContentTypePage: NextPage = () => {
                 <Column className="w-0"></Column>
                 <Column>
                   <Link
-                    href={`/${currentProject?.slug}/${currentEnvironment?.slug}/collections/${currentContentType?.id}/resources/${resource.slug}`}
+                    href={`/${currentProject?.id}/${currentEnvironment?.slug}/collections/${currentContentType?.id}/resources/${resource.slug}`}
                   >
                     {resource.name}
                   </Link>
                 </Column>
                 <Column>
-                  <LocalTime epochTime={resource.updated_at} />
+                  {resource.updated_at}
+                  {/* <LocalTime epochTime={resource.updated_at} /> */}
                 </Column>
                 <Column>
-                  <LocalTime epochTime={resource.created_at} />
+                  {resource.created_at}
+                  {/* <LocalTime epochTime={resource.created_at} /> */}
                 </Column>
                 <Column>
                   <Group gap={5}>

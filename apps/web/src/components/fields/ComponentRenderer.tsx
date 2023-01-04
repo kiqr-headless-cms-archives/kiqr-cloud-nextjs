@@ -128,7 +128,6 @@ export const ComponentRenderer = (
 
     // uses move from useFieldArray to change the position of the form
     // const handleDrag = ({ source, destination }) => {
-    //   console.log('lool', source, destination)
     //   if (destination) {
     //     move(source.index, destination.index)
     //   }
